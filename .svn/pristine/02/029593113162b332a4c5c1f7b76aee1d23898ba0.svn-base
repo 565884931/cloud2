@@ -1,0 +1,112 @@
+logging:
+  config: classpath:logback.xml
+  #path: d:/logs/
+server:
+  port: 8700
+  #basedir: /usr/local/projectDoc/tmp
+  maxHttpHeaderSize: 409600000
+  maxHttpPostSize: 409600000
+spring:
+  boot:
+    admin:
+      client:
+        url: http://admin:admin@127.0.0.1:8880
+  http:
+    multipart:
+#      maxHttpHeaderSize: 102400000
+#      maxHttpPostSize: 102400000
+      enabled: true   # 启用http上传处理
+      max-file-size: 600MB # 设置单个文件的最大长度
+      max-request-size: 600MB # 设置最大的请求文件的大小
+#      file-size-threshold: 1MB  # 当上传文件达到1MB的时候进行磁盘写入
+  application:
+    name: cr-cloud-zuul
+  # 数据源支持 也支持密文 用户名密码
+  datasource:
+    url: jdbc:oracle:thin:@//10.101.96.2:1521/crmpdb
+    username: F1_HRA
+    password: F1_HRA$CR123
+    driver-class-name: oracle.jdbc.OracleDriver
+    # Alibaba druid 连接池支持
+    druid.initial-size: 1
+    druid.min-idle: 1
+    druid.max-active: 10
+    druid.test-on-borrow: true
+    druid.stat-view-servlet.allow: true 
+  jackson:
+    serialization:
+      indent-output: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update 
+  # sso的redis 缓存，暂时用65.5 后续着生产环境变动改变缓存位置
+  redis:
+    host: 10.101.65.5
+    password: 123456
+    port: 8380
+    pool:
+      max-idle: 100
+      min-idle: 1
+      max-active: 1000
+      max-wait: -1
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    # 开启健康检查（需要spring-boot-starter-actuator依赖）
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      # 服务器注册/获取服务器的zone
+      defaultZone: http://admin:admin@127.0.0.1:8761/eureka
+  instance:
+    #表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。
+    lease-expiration-duration-in-seconds: 15
+    #表示eureka client发送心跳给server端的频率。
+    lease-renewal-interval-in-seconds: 5
+    #client 在 erueka 中使用 IP 注册  
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+logging.level:
+  root: info
+  org.springframework: info
+zuul:
+  #设置参数Encoding
+  forceOriginalQueryStringEncoding: true
+ # routes:
+  #  service-A:
+   #   path: /**
+    #  serviceId: api
+  max:
+    host:
+      connections: 100000
+  host:
+    connect-timeout-millis: 100000
+    socket-timeout-millis: 100000
+    maxPerRouteConnections : 100
+    maxTotalConnections : 800
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 120000
+ribbon:
+  ReadTimeout: 90000
+  ConnectTimeout: 90000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+  eureka:
+    enabled: true
+    
+management:
+     security:
+        enabled: false
+        
+privilage: 
+  isOpen: false
+  defaultEmpeId: HRSD5147
+      
+      

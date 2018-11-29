@@ -1,0 +1,33 @@
+logging:
+  config: classpath:logback.xml
+  #path: ../logs/
+server:
+  port: 8761
+  
+spring:
+  security:
+    user:
+      name: admin
+      password: admin
+  application:
+    name: eureka-server
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    # 开启健康检查（需要spring-boot-starter-actuator依赖）
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      # 服务器注册/获取服务器的zone
+      defaultZone: http://admin:admin@127.0.0.1:8761/eureka
+  instance:
+    #表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。
+    lease-expiration-duration-in-seconds: 15
+    #表示eureka client发送心跳给server端的频率。
+    lease-renewal-interval-in-seconds: 5
+    #client 在 erueka 中使用 IP 注册  
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}

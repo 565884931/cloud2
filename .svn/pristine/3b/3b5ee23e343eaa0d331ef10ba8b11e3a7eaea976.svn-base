@@ -1,0 +1,40 @@
+logging:
+  config: classpath:logback.xml
+  #path: d:/logs/
+server:  
+  port: 8888
+spring:  
+  profiles:  
+    include: subversion
+  #  active: native
+  application:  
+    name: cr-cloud-config-center
+  cloud:  
+    config: 
+      #name: config-center
+      #profile: dev
+      label: src
+      enabled: true
+      server:   
+        svn:  
+          uri: http://10.101.7.1/svn/HJCRM/trunk/03-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91/cr-cloud/config-properties/ 
+          default-label: dev-file
+          search-paths: dev-file
+          username: qixiaolei
+          password: qxl654321
+management:
+     security:
+        enabled: false
+eureka:
+  
+  #instance:
+    # 每隔10s发送一次心跳
+    #leaseRenewalIntervalInSeconds: 10
+    # 告知服务端10秒还未收到心跳的话，就将该服务移除列表
+    #leaseExpirationDurationInSeconds: 10
+    registration:
+      enabled:  true
+    shouldUseDns: false
+    serviceUrl:
+      default: http://admin:admin@127.0.0.1:8761/eureka
+ 

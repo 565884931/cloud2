@@ -1,0 +1,50 @@
+server:
+  port: 8872
+spring:
+  kafka:
+    bootstrap-servers: 10.101.96.11:9092
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        # config center service id
+        serviceId: cr-cloud-config-center
+      # svn 对应的配置文件的profile
+      profile: ${config.profile:dev}
+      # name 对应指定svn配置文件名，同时加上profile 为文件后缀
+      name: cr-cloud-config-center
+    bus: 
+      enabled: true      
+  application:
+    name: cr-cloud-config-clientONE
+ 
+# 1.5.0.RELEASE 以后默认开通认证 需要关闭认证才可以刷新
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:      
+        include: refresh      
+
+# yml中直接可使用svn remote config properties 
+
+configTest:
+  # 示例
+  testYml: ${test}
+  
+eureka:
+  instance:
+    prefer-ip-address: true
+    # 每隔10s发送一次心跳
+    # leaseRenewalIntervalInSeconds: 10
+    # 告知服务端10秒还未收到心跳的话，就将该服务移除列表
+    # leaseExpirationDurationInSeconds: 10
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    # 表示eureka client间隔多久去拉取服务注册信息,默认为30秒
+    registry-fetch-interval-seconds: 30
+    # eureka 注册服务地址
+    serviceUrl:
+      defaultZone: http://admin:admin@127.0.0.1:8761/eureka
