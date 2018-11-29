@@ -1,0 +1,62 @@
+logging:
+  config: classpath:logback.xml
+  #path: d:/logs/
+server:  
+  port: 8888
+spring:
+  kafka:
+    bootstrap: 
+      servers: 10.101.96.11:9092
+    consumer:
+      group-id: testbus  
+  profiles:  
+    include: subversion
+  #  active: native
+  application:  
+    name: cr-cloud-config-center
+  cloud:  
+    config: 
+      #name: config-center
+      #profile: dev
+      label: src
+      enabled: true
+      server:   
+        svn:  
+          uri: http://10.101.7.1/svn/HJCRM/trunk/03-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91/cr-cloud/config-properties/ 
+          default-label: dev-file
+          search-paths: dev-file
+          username: qixiaolei
+          password: qxl654321
+#    stream:
+#      kafka:
+#        binder:
+#          zk-nodes: 10.101.96.11:2181
+#          brokers: 10.101.96.11:9092
+
+    bus:
+      refresh: 
+        enabled: true          
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh  
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    # 开启健康检查（需要spring-boot-starter-actuator依赖）
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      # 服务器注册/获取服务器的zone
+      defaultZone: http://admin:admin@127.0.0.1:8761/eureka
+  instance:
+    #表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。
+    lease-expiration-duration-in-seconds: 15
+    #表示eureka client发送心跳给server端的频率。
+    lease-renewal-interval-in-seconds: 5
+    #client 在 erueka 中使用 IP 注册  
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+ 
