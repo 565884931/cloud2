@@ -1,0 +1,28 @@
+logging:
+  config: classpath:logback.xml
+  #path: ../logs/
+server:
+  port: 8761
+security:  
+  basic:  
+    enabled: true  
+  user:  
+   name: admin  
+   password: admin    
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  #instance:
+    #hostname: backup
+  client: 
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://admin:amdin@127.0.0.1:8761/eureka
+  server:
+    # 关闭自我保护机制
+    enable-self-preservation: false   
+    # 每隔10s扫描服务列表，移除失效服务
+    eviction-interval-timer-in-ms: 10000    
