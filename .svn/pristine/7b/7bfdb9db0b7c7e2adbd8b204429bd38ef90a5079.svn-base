@@ -1,0 +1,50 @@
+logging:
+  config: classpath:logback.xml
+  #path: d:/logs/
+server:  
+  port: 8888
+spring:  
+  profiles:  
+    active: subversion
+  application:  
+    name: cr-cloud-config-center
+  cloud:  
+    config: 
+      #name: config-center
+      #profile: dev
+      label: src
+      enabled: true
+      server:   
+        svn:  
+          uri: http://10.101.7.1/svn/HJCRM/trunk/03-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91/cr-cloud/config-properties/ 
+          default-label: dev-file
+          search-paths: dev-file
+          username: qixiaolei
+          password: qxl654321
+    stream:
+      kafka:
+        binder:
+          zk-nodes: 10.101.96.11:2181
+          brokers: 10.101.96.11:9092
+    bus: 
+       enabled: true          
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh          
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    # 每隔10s发送一次心跳
+    #leaseRenewalIntervalInSeconds: 10
+    # 告知服务端10秒还未收到心跳的话，就将该服务移除列表
+    #leaseExpirationDurationInSeconds: 10
+  client:
+    #表示eureka client间隔多久去拉取服务注册信息,默认为30秒
+    registry-fetch-interval-seconds: 10
+    serviceUrl:
+      defaultZone: http://admin:admin@10.101.96.11:8761/eureka
+      #defaultZone: http://user:password@10.101.65.6:8761/eureka,http://user:password@10.101.65.7:8762/eureka
+ 

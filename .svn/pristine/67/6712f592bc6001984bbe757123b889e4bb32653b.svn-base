@@ -1,0 +1,42 @@
+# port
+server:
+  port: 12084
+
+spring:
+  application:
+    # 本服务注册到注册到服务器的名称, 这个名称就是后面调用服务时的服务标识符
+    name: cloud-consumer-hystrix-two
+  sleuth: 
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1 #样本采集量，默认为0.1，为了测试这里修改为1，正式环境一般使用默认值。     
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+    
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream       
+eureka: 
+  client: 
+    serviceUrl:
+      # 服务器注册/获取服务器的zone
+      defaultZone: http://admin:admin@127.0.0.1:8761/eureka
+      #defaultZone: http://127.0.0.1:10761/eureka/
+      # defaultZone: http://192.168.21.3:10761/eureka/,http://192.168.21.4:10761/eureka/
+  instance:
+    instance-id: 127.0.0.1:${server.port}
+    preferIpAddress: true  
+    
+turbine:
+  app-config: ribbon-consumer
+  cluster-name-expression: "default"
+  combine-host-port: true
+  
+  
+  
+   

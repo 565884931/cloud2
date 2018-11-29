@@ -1,0 +1,25 @@
+logging:
+  config: classpath:logback.xml
+  #path: d:/logs/
+# port
+server:
+  port: 8086
+
+spring:
+  application:
+    # 本服务注册到注册到服务器的名称, 这个名称就是后面调用服务时的服务标识符
+    name: cr-cloud-hystrix
+management:
+  security: 
+    enabled: false
+  endpoints:
+    web:
+      exposure: 
+        include: "*"       
+eureka:
+  client:
+    serviceUrl:
+      # 服务器注册/获取服务器的zone
+      defaultZone: http://admin:admin@127.0.0.1:8761/eureka
+  instance:
+    prefer-ip-address: true
