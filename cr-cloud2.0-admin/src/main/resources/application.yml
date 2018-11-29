@@ -1,0 +1,55 @@
+logging:
+  config: classpath:logback.xml
+  path: d:/logs/
+server:
+  port: 8880
+  session-timeout: 60
+
+spring:
+    application:
+        name: cr-cloud-admin
+    mail:
+      host: smtp.partner.outlook.cn
+      port: 587
+      username: HRIS@huaxing.com
+      password: Password123
+      from: HRIS@huaxing.com
+      properties:
+        mail:
+          smtp:
+            auth: true
+            timeout: 25000
+            starttls:
+              enabled: true
+              required: true
+    boot:
+        admin:
+          url: http://localhost:${server.port}
+        notify:
+          mail:
+          to: xlqi@huaxing.com
+          from: HRIS@huaxing.com
+            
+management:
+     security:
+        enabled: false
+
+info:
+   app:
+       name: "@project.name@"  #从pom.xml中获取,pom.xml中需build中加入插件spring-boot-maven-plugin
+       description: "@project.description@" 
+       version: "@project.version@"
+       spring-boot-version: "@project.parent.version@"
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#    # 每隔10s发送一次心跳
+#    # leaseRenewalIntervalInSeconds: 10
+#    # 告知服务端10秒还未收到心跳的话，就将该服务移除列表
+#    # leaseExpirationDurationInSeconds: 10
+#  client:
+#    # 表示eureka client间隔多久去拉取服务注册信息,默认为30秒
+#    registry-fetch-interval-seconds: 10
+#    # eureka 注册服务地址
+#    serviceUrl:
+#      defaultZone: http://user:password@10.101.65.6:8761/eureka,http://user:password@10.101.65.7:8762/eureka         
