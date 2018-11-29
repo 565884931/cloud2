@@ -16,16 +16,16 @@ spring:
       enabled: true
       server:   
         svn:  
-          uri: http://10.101.7.1/svn/HJCRM/trunk/03-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91/cr-cloud/config-properties/ 
+          uri: http://xxx1/svn/HJCRM/trunk/03-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91/cr-cloud/config-properties/ 
           default-label: dev-file
           search-paths: dev-file
-          username: qixiaolei
-          password: qxl654321
+          username: xxxx
+          password: xxxx
     stream:
       kafka:
         binder:
-          zk-nodes: 10.101.96.11:2181
-          brokers: 10.101.96.11:9092
+          zk-nodes: xxxx
+          brokers: xxxx
     bus: 
        enabled: true          
 management:

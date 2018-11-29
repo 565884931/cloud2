@@ -15,9 +15,9 @@ spring:
   mail:
   #端口
     host: smtp.qq.com
-    username: 565884931@qq.com
+    username: xxx
     #授权码
-    password: oyxqsnvlomkbbfjb
+    password: xxx
     properties:
       mail:
         smtp:
@@ -30,9 +30,9 @@ spring:
       notify:
         mail:
            #从那里发
-          from: 565884931@qq.com
+          from: xxxx
           #发到哪里
-          to: 565884931@qq.com
+          to: xxx
           #配置是否启用邮件通知
           enabled: true          
           

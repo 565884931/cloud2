@@ -2,7 +2,7 @@ server:
   port: 8882
 spring:
   kafka:
-    bootstrap-servers: 10.101.96.11:9092
+    bootstrap-servers: xxxx
   cloud:
     config:
       discovery:

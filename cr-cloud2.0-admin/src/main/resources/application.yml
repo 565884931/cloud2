@@ -11,9 +11,9 @@ spring:
     mail:
       host: smtp.partner.outlook.cn
       port: 587
-      username: HRIS@huaxing.com
-      password: Password123
-      from: HRIS@huaxing.com
+      username: xxx
+      password: xxx
+      from: xxx
       properties:
         mail:
           smtp:
@@ -27,8 +27,8 @@ spring:
           url: http://localhost:${server.port}
         notify:
           mail:
-          to: xlqi@huaxing.com
-          from: HRIS@huaxing.com
+          to: xxx
+          from: xxx
             
 management:
      security:
@@ -52,4 +52,3 @@ info:
 #    registry-fetch-interval-seconds: 10
 #    # eureka 注册服务地址
 #    serviceUrl:
-#      defaultZone: http://user:password@10.101.65.6:8761/eureka,http://user:password@10.101.65.7:8762/eureka         

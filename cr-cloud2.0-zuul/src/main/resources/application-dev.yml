@@ -23,9 +23,9 @@ spring:
     name: cr-cloud-zuul
   # 数据源支持 也支持密文 用户名密码
   datasource:
-    url: jdbc:oracle:thin:@//10.101.96.2:1521/crmpdb
-    username: F1_HRA
-    password: F1_HRA$CR123
+    url: jdbc:oracle:thin:@//xxx:1521/crmpdb
+    username: xxx
+    password: xxx
     driver-class-name: oracle.jdbc.OracleDriver
     # Alibaba druid 连接池支持
     druid.initial-size: 1
