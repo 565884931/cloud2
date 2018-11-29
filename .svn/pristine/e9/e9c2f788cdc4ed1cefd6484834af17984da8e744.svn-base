@@ -1,0 +1,63 @@
+logging:
+  config: classpath:logback.xml
+  #path: d:/logs/
+server:
+  port: 8880
+  session-timeout: 60
+
+spring:
+  security:
+    user:
+      name: admin
+      password: admin
+  application:
+    name: cr-cloud-admin
+  mail:
+  #端口
+    host: smtp.qq.com
+    username: 565884931@qq.com
+    #授权码
+    password: oyxqsnvlomkbbfjb
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  boot:
+    admin:
+      notify:
+        mail:
+           #从那里发
+          from: 565884931@qq.com
+          #发到哪里
+          to: 565884931@qq.com
+          #配置是否启用邮件通知
+          enabled: true          
+          
+management:
+     security:
+        enabled: false
+
+info:
+   app:
+       name: "@project.name@"  #从pom.xml中获取,pom.xml中需build中加入插件spring-boot-maven-plugin
+       description: "@project.description@" 
+       version: "@project.version@"
+       spring-boot-version: "@project.parent.version@"
+eureka:
+  instance:
+    prefer-ip-address: true
+    # 每隔10s发送一次心跳
+    # leaseRenewalIntervalInSeconds: 10
+    # 告知服务端10秒还未收到心跳的话，就将该服务移除列表
+    # leaseExpirationDurationInSeconds: 10
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    # 表示eureka client间隔多久去拉取服务注册信息,默认为30秒
+    registry-fetch-interval-seconds: 10
+    # eureka 注册服务地址
+    serviceUrl:
+      defaultZone: http://admin:admin@127.0.0.1:8761/eureka
